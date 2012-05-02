@@ -25,6 +25,7 @@ public class SwingInterface implements GraphicInterface {
 		window.setBounds(10, 10, Integer.parseInt(config.getConfig("width")),
 				Integer.parseInt(config.getConfig("height")));
 		window.setVisible(true);
+		GamePanel.getInstance().init();
 	}
 
 	@Override
