@@ -13,7 +13,24 @@ import edu.itla.fortiori.config.base.ConfigurationManager;
 public class PropertyConfigurationManager implements ConfigurationManager{
 	private Properties properties;
 	private final String CONFIG_FILE = "fortiori.config";
-	Map<String,String> allConfig;
+	private static PropertyConfigurationManager instance;
+	private Map<String,String> allConfig;
+	
+	public static synchronized PropertyConfigurationManager getInstance(){
+		if(instance == null){
+			instance = new PropertyConfigurationManager();
+		}
+		return instance;
+	}
+	
+	private PropertyConfigurationManager(){
+		try{
+			load();
+		}catch(Exception e){
+			System.err.println("Error while loading configuration: " + e);
+			e.printStackTrace();
+		}
+	}
 	@Override
 	public void load() throws Exception {
 		allConfig = new HashMap<String,String>();
@@ -21,12 +38,7 @@ public class PropertyConfigurationManager implements ConfigurationManager{
 		properties = new Properties();
 		properties.load(new FileInputStream(CONFIG_FILE));
 		//TODO: Implement log4j for logging		
-		//properties.list(System.out);
-		//properties.
-		//System.out.println(properties.get("name"));
-		
 		//Loading the Config Map
-		
 		for(Object key:properties.keySet()){
 			allConfig.put((String)key, getConfig((String)key));
 		}
