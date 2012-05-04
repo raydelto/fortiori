@@ -1,9 +1,6 @@
 package edu.itla.fortiori.gui.swing;
 
-import java.lang.reflect.InvocationTargetException;
-
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 import edu.itla.fortiori.config.PropertyConfigurationManager;
 import edu.itla.fortiori.gui.base.GraphicInterface;
@@ -11,8 +8,16 @@ import edu.itla.fortiori.gui.base.GraphicInterface;
 public class SwingInterface implements GraphicInterface {
 	private JFrame window;
 	private PropertyConfigurationManager config;
+	private static SwingInterface instance;
+	
+	public static synchronized SwingInterface getInstance(){
+		if(instance == null){
+			instance = new SwingInterface();
+		}
+		return instance;
+	}
 
-	public SwingInterface() {
+	private SwingInterface() {
 		config = PropertyConfigurationManager.getInstance();
 	}
 
@@ -26,6 +31,16 @@ public class SwingInterface implements GraphicInterface {
 				Integer.parseInt(config.getConfig("height")));
 		window.setVisible(true);
 		GamePanel.getInstance().init();
+	}
+	
+	public void end(String result){
+		window.remove(GamePanel.getInstance());
+		window.add(ResultPanel.getInstance());
+		if("win".equalsIgnoreCase(result)){
+			ResultPanel.getInstance().win();
+		}else{
+			ResultPanel.getInstance().loose();
+		}
 	}
 
 	@Override

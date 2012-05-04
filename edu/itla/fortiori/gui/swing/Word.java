@@ -27,13 +27,19 @@ public class Word extends JLabel implements Runnable {
 				if(destroyed){
 					return;
 				}
-				if(correct){
+				if(!correct){
 					setForeground(Color.RED);
 					destroyed = true;
 					word.setScore(word.getScore() + 10);
+					if(word.getScore() >=30){
+						SwingInterface.getInstance().end("win");
+					}
 				}else{
 					setForeground(Color.BLUE);
 					word.setScore(word.getScore() - 5);
+					if(word.getScore() <1){
+						SwingInterface.getInstance().end("loose");
+					}
 				}
 			}
 		});

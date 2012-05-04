@@ -9,13 +9,14 @@ public class RawLevelProvider implements LevelProvider{
 	private List<Level> levels;
 	
 	public RawLevelProvider(){
-		Word yeah = new Word("Yeah",10,-40,4,true);
-		Word francais = new Word("Francais",230,-40,7,false);
-		Word palma = new Word("Palma",530,-40,8,true);
 		ArrayList<Word> words = new ArrayList<Word>();
-		words.add(yeah);
-		words.add(francais);
-		words.add(palma);
+		words.add(new Word("Carro",10,-40,4,true));
+		words.add(new Word("Yamar",230,-40,7,false));
+		words.add(new Word("Hayga",530,-40,8,false));	
+		words.add(new Word("Introdusca",100,-40,4,false));
+		words.add(new Word("Selular",330,-40,7,false));
+		words.add(new Word("Baca",630,-40,8,false));
+		
 		Level test = new Level("Nivel de prueba","clouds.png",3,words);
 		levels = new ArrayList<Level>();
 		levels.add(test);

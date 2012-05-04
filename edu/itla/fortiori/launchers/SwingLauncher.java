@@ -10,7 +10,7 @@ import edu.itla.fortiori.gui.swing.WordManager;
  */
 public class SwingLauncher {
 	public static void main(String[] args) throws Exception{
-		SwingInterface swing = new SwingInterface();
+		SwingInterface swing = SwingInterface.getInstance();
 		WordManager.getInstance().setLevel(new RawLevelProvider().getFirstLevel());
 		//ScreenManager.getInstance().setFullScreen(new DisplayMode(800, 600, 32, 0));
 		swing.start();
